@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*  Antd override*/
+input{
+  border-radius: 2px !important;
+  border: 1px solid rgba(128, 128, 128, 0.0.5);
+  height: 40% !important;
+  height: 40px !important;
+}
+input:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid gray !important;
+}
+label{
+  font-size: 18px !important;
+  color: black;
+}
+.card-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: orangered !important;
+  color: white !important;
+  text-transform: uppercase;
+  margin-left: -40px !important;
+  border-bottom-left-radius: 10px !important;
+  width: 250px !important;
+  padding: 10px !important;
+
+}
+.normal-text{
+  font-size: 1rem;
+}
+.card{
+  box-shadow: 0 0 2px gray;
+  border: 1px solid rgba(128, 128, 128, 0.568) !important;
+  width: 500px !important;
+  text-transform: capitalize !important;
+}
+
+.ant-form-item{
+  margin: 10px 0 !important;
+}
+
+.authentication{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #005555 !important;
+}
+.submit-button
+{
+  background-color: #005555 !important;
+  border-color: #005555  !important;
+  height: 40px !important;
+  width: 100% !important;
+  color: white !important;
+  font-size: 16px !important;
+
+}
+.register-login-links
+{
+  color: black !important;
+  text-transform: uppercase !important;
+  text-decoration: underline;
+  font-size: 1rem !important;
+}
+.register-login-links:hover{
+ text-decoration: underline;
+}
