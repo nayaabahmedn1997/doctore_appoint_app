@@ -14,6 +14,7 @@ import { app } from '../index.js';
 jest.mock('../models/userModel.js');
 jest.mock('jsonwebtoken', () => ({
     sign: jest.fn(() => 'mocked-token'),
+    verify: jest.fn(),
 }));
 
 // ✅ Register test
@@ -27,7 +28,7 @@ describe('POST /register', () => {
         userModel.findOne.mockResolvedValue(null); // no existing user
         userModel.prototype.save = jest.fn().mockResolvedValue();
 
-        const res = await request(app).post('/users/register').send({
+        const res = await request(app).post('/auth/registerUser').send({
             name: 'Test User',
             email: 'test@example.com',
             password: 'password123'
@@ -40,7 +41,7 @@ describe('POST /register', () => {
     it('should fail if user already exists', async () => {
         userModel.findOne.mockResolvedValue({ email: 'test@example.com' });
 
-        const res = await request(app).post('/users/register').send({
+        const res = await request(app).post('/auth/registerUser').send({
             name: 'Test User',
             email: 'test@example.com',
             password: 'password123'
@@ -66,7 +67,7 @@ describe('POST /login', () => {
         userModel.findOne.mockResolvedValue(mockUser);
         jwt.sign = jest.fn().mockReturnValue('mocked-token');
 
-        const res = await request(app).post('/users/login').send({
+        const res = await request(app).post('/auth/loginUser').send({
             email: 'test@example.com',
             password: 'password123'
         });
@@ -79,7 +80,7 @@ describe('POST /login', () => {
     it('should fail if user does not exist', async () => {
         userModel.findOne.mockResolvedValue(null);
 
-        const res = await request(app).post('/users/login').send({
+        const res = await request(app).post('/auth/loginUser').send({
             email: 'wrong@example.com',
             password: 'password123'
         });
@@ -94,7 +95,7 @@ describe('POST /login', () => {
         };
         userModel.findOne.mockResolvedValue(mockUser);
 
-        const res = await request(app).post('/users/login').send({
+        const res = await request(app).post('/auth/loginUser').send({
             email: 'test@example.com',
             password: 'wrongpassword'
         });
@@ -102,4 +103,37 @@ describe('POST /login', () => {
         expect(res.statusCode).toBe(401);
         expect(res.body.success).toBe(false);
     });
+});
+
+// ✅ Fetch user test
+describe('GET /auth/get-user-data', () => {
+  const fakeUserId = new mongoose.Types.ObjectId().toString();
+  const token = 'mocked.jwt.token';
+
+  beforeAll(() => {
+    process.env.JWT_SECRET = 'testsecret';
+  });
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jwt.verify.mockReturnValue({ id: fakeUserId }); // ✅ important
+  });
+
+  it('Should fetch userdata for respective userID', async () => {
+    const fakeUser = {
+      _id: fakeUserId,
+      name: 'John Doe',
+      email: 'john@example.com',
+    };
+
+    userModel.findById.mockResolvedValue(fakeUser);
+
+    const res = await request(app)
+      .get('/auth/get-user-data')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual(fakeUser); // ✅ use toEqual for objects
+    expect(userModel.findById).toHaveBeenCalledWith(fakeUserId);
+  });
 });

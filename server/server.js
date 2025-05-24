@@ -17,7 +17,6 @@ const PORT = process.env.PORT;
 
 
 
-
 //Connect to MongoDB
 connectDB();
 

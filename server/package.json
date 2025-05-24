@@ -9,20 +9,21 @@
     "test": "jest"
   },
   "jest": {
-     "coveragePathIgnorePatterns": [
-    "/node_modules/",
-    "config.js"
-  ],
-  "collectCoverage": true,
-  "coverageThreshold": {
-    "global": {
-      "branches": 80,
-      "functions": 80,
-      "lines": 80,
-      "statements": 80
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "config.js",
+      "/models/"
+    ],
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
     }
-  }
-},
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -34,6 +35,10 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.14.3",
+    "morgan": "^1.10.0",
+    "react-toastify": "^11.0.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "validator": "^13.15.0"
   },
   "devDependencies": {

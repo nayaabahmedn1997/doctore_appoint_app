@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import userModel from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 export const registerUser = async (req, res) => {
@@ -28,7 +27,6 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-
         const { email, password } = req.body;
 
         //Check is user exists
@@ -60,7 +58,7 @@ export const loginUser = async (req, res) => {
         const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {
             expiresIn: '1d'
         });
-
+        console.log(token)
         return res.status(200).json({
             "message": "User login successful",
             "success": true,
@@ -68,6 +66,32 @@ export const loginUser = async (req, res) => {
         })
 
 
+
+    } catch (error) {
+        console.error('Login error:', error);
+        return res.status(500).json({ "message": `${error.message}` })
+    }
+}
+
+export const getUserData = async(req, res)=>{
+    try {
+        const {userId} = req.body;
+        const user = await userModel.findById(userId).select('-password -__v');
+
+        if(!user)
+        {
+            return res.status(401).json(
+                {
+                    "message":"User doesn't exists",
+                    success:false
+                }
+            )
+        }
+        return res.status(200).json({
+            "message":"User found successfully",
+            user,
+            "success":true
+        })
 
     } catch (error) {
         console.error('Login error:', error);
