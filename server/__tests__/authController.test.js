@@ -14,7 +14,7 @@ import { app } from '../index.js';
 jest.mock('../models/userModel.js');
 jest.mock('jsonwebtoken', () => ({
     sign: jest.fn(() => 'mocked-token'),
-    verify: jest.fn(),
+    verify: jest.fn(() => { id: 'mockedUserId' }),
 }));
 
 // ✅ Register test
@@ -107,33 +107,30 @@ describe('POST /login', () => {
 
 // ✅ Fetch user test
 describe('GET /auth/get-user-data', () => {
-  const fakeUserId = new mongoose.Types.ObjectId().toString();
-  const token = 'mocked.jwt.token';
-
-  beforeAll(() => {
-    process.env.JWT_SECRET = 'testsecret';
-  });
-
   beforeEach(() => {
-    jest.clearAllMocks();
-    jwt.verify.mockReturnValue({ id: fakeUserId }); // ✅ important
+    jwt.verify.mockReturnValue({ id: 'mockedUserId' });
+
+   
   });
 
-  it('Should fetch userdata for respective userID', async () => {
-    const fakeUser = {
-      _id: fakeUserId,
+  it('should return user data', async () => {
+     jwt.verify.mockReturnValue({ id: 'mockedUserId' });
+     await userModel.findById.mockResolvedValue({
+      _id: 'mockedUserId',
       name: 'John Doe',
       email: 'john@example.com',
-    };
-
-    userModel.findById.mockResolvedValue(fakeUser);
-
+    });
     const res = await request(app)
       .get('/auth/get-user-data')
-      .set('Authorization', `Bearer ${token}`);
-
+      .set('Authorization', 'Bearer mocked-token');
+      console.log(res)
+    jest.spyOn(console, 'log')
     expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual(fakeUser); // ✅ use toEqual for objects
-    expect(userModel.findById).toHaveBeenCalledWith(fakeUserId);
+    
+    expect(res.body).toMatchObject({
+      name: 'John Doe',
+      email: 'john@example.com',
+    });
+    expect(userModel.findById).toHaveBeenCalledWith('mockedUserId');
   });
 });

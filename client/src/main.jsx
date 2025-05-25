@@ -6,13 +6,16 @@ import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './store/index.js';
 import '@ant-design/v5-patch-for-react-19';
+import { BrowserRouter } from 'react-router-dom';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
-      <ToastContainer />
+      <BrowserRouter>
+        <App />
+        <ToastContainer />
+      </BrowserRouter>
     </Provider>
   </StrictMode>,
 );

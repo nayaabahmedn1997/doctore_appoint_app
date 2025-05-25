@@ -7,18 +7,17 @@ import { stopLoading } from '../store/loadingSlice';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  const { data, isLoading, error } = useGetUserQuery();
+  const { data, _, error } = useGetUserQuery();
   const isSpinnerLoading = useSelector((state) => state.loader.isLoading);
 
   useEffect(() => {
     if (data) {
-      console.log(data);
-      showToast({ type: "success", message: data.message });
+      showToast({ type: 'success', message: data.message });
       stopLoading();
     }
     if (error) {
       console.log(error);
-      showToast({ type: "error", message: data.message });
+      showToast({ type: 'error', message: data.message });
       stopLoading();
     }
   }, [data]); // Runs when `data` changes

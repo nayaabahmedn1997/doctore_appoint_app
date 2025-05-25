@@ -27,7 +27,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:controllers/userController.js
+SF:controllers\userController.js
 FN:3,(anonymous_0)
 FN:28,(anonymous_1)
 FN:76,(anonymous_2)
@@ -86,7 +86,7 @@ BRF:10
 BRH:7
 end_of_record
 TN:
-SF:middlewares/authMiddleware.js
+SF:middlewares\authMiddleware.js
 FN:4,(anonymous_0)
 FNF:1
 FNH:1
@@ -110,7 +110,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:routes/userRoutes.js
+SF:routes\userRoutes.js
 FNF:0
 FNH:0
 DA:7,1

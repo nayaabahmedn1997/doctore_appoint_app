@@ -14,7 +14,7 @@ const Login = () => {
       const res = await loginUser(formData).unwrap();
       showToast({type:'success', message: res.message});
       localStorage.setItem('token', res.token);
-      navigate('/dashboard');
+      navigate('/');
       stopLoading();
     } catch (error) {
       stopLoading();
