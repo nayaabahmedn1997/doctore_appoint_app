@@ -1,0 +1,119 @@
+.main {
+    padding: 20px;
+    height: 100vh !important;
+}
+
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    background-color: #005555;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    margin-right: 20px;
+    height: 100vh;
+    padding: 10px;
+    width: 250px;
+    color: white;
+}
+
+.logo{
+    color: white;
+    font-weight: bold;
+}
+
+.collapsed-sidebar {
+    background-color: #005555;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    margin-right: 20px;
+    height: 100vh;
+    padding: 10px;
+    width: 80px;
+    color: white;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    margin-bottom: 20px;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notification-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+.notification-container .username{
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+.body {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    height: 85vh;
+    width: 100%;
+    overflow-y: auto;
+}
+.menu
+{
+    margin-top: 20px;
+}
+.menu-item
+{
+    margin-top: 30px;
+
+}
+.menu-item a{
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.menu-item i{
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    margin-right: 8px;
+}
+.active-menu-item
+{
+    color: white;
+    background-color: #013737;
+    padding: 5px;
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+}
+.remix-icons{
+    font-size: 40px !important;
+    cursor: pointer;
+    padding-left: 10px;
+}
+.logout-text
+{
+    font-size: 25px;
+}
+@media screen {
+    .menu{
+        padding: 0 5px;
+        
+    }
+}

@@ -17,7 +17,6 @@ export const api = createApi({
         headers.set('Authorization', `Bearer ${token}`);
       }
 
-      console.log('Outgoing Headers:', Object.fromEntries(headers.entries())); // ✅ Debug log
       return headers;
     },
   }),
@@ -41,7 +40,7 @@ export const api = createApi({
     }),
 
     getUser: builder.query({
-      query: () => `auth/get-user-data`,
+      query: () => 'auth/get-user-data',
       providesTags: (result, error, id) => [{ type: 'Dashboard', id }],
     }),
   }),
